@@ -86,6 +86,17 @@ export class Editor {
       this.onChange?.(this.ta.value);
     });
     this.ta.addEventListener('keydown', (e) => this.onKey(e));
+    // Safety net: the textarea must never scroll on its own (the outer .editor
+    // does the scrolling). If the browser scrolls it anyway, hand the offset to
+    // the outer container so the caret and the highlighted text stay aligned.
+    this.ta.addEventListener('scroll', () => {
+      const { scrollTop, scrollLeft } = this.ta;
+      if (!scrollTop && !scrollLeft) return;
+      this.ta.scrollTop = 0;
+      this.ta.scrollLeft = 0;
+      root.scrollTop += scrollTop;
+      root.scrollLeft += scrollLeft;
+    });
   }
 
   setValue(code, lang) {

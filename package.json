@@ -6,12 +6,13 @@
   "type": "module",
   "scripts": {
     "serve": "node scripts/serve.mjs",
-    "test": "node tests/smoke.mjs http://localhost:8080",
+    "test": "node tests/smoke.mjs http://localhost:8080 && node tests/editor.mjs http://localhost:8080",
     "cap:add:android": "cap add android",
     "cap:add:ios": "cap add ios",
     "cap:sync": "cap sync",
     "cap:open:android": "cap open android",
-    "cap:open:ios": "cap open ios"
+    "cap:open:ios": "cap open ios",
+    "test:editor": "node tests/editor.mjs http://localhost:8080"
   },
   "devDependencies": {
     "@capacitor/android": "^6.1.2",

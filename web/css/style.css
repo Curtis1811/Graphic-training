@@ -271,7 +271,7 @@ td code { white-space: nowrap; overflow-wrap: normal; }
 .tk-fn { color: var(--tk-fn); }
 .tk-num { color: var(--tk-num); }
 .tk-str { color: var(--tk-str); }
-.tk-com { color: var(--tk-com); font-style: italic; }
+.tk-com { color: var(--tk-com); }
 .tk-pre { color: var(--tk-pre); }
 .tk-var { color: var(--tk-var); }
 .tk-const { color: var(--tk-const); }
@@ -475,6 +475,9 @@ td code { white-space: nowrap; overflow-wrap: normal; }
   left: 0;
   z-index: 2;
   flex: none;
+  /* Grow with the code (not just the visible area) so the background covers every line. */
+  align-self: flex-start;
+  min-height: 100%;
   min-width: 42px;
   padding: var(--ed-pad) 8px var(--ed-pad) 6px;
   background: var(--code-bg);
@@ -486,7 +489,10 @@ td code { white-space: nowrap; overflow-wrap: normal; }
   -webkit-user-select: none;
 }
 .ed-gutter b { color: var(--err); }
-.ed-code { position: relative; flex: 1 0 auto; }
+/* The code layer must be as tall as ALL the code, not just the visible area.
+   Otherwise the textarea (which owns the caret) scrolls by itself and drifts
+   away from the highlighted text drawn underneath it. */
+.ed-code { position: relative; flex: 1 0 auto; align-self: flex-start; min-height: 100%; }
 .ed-hl, .ed-input {
   margin: 0;
   padding: var(--ed-pad) 16px 40px 12px;
@@ -496,6 +502,9 @@ td code { white-space: nowrap; overflow-wrap: normal; }
   white-space: pre;
   tab-size: 2;
   border: 0;
+  /* Keep both layers on an identical character grid (e.g. Cascadia Code ligatures). */
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0;
 }
 .ed-hl { position: relative; color: #d6d9ea; pointer-events: none; min-height: 100%; }
 .ed-input {
