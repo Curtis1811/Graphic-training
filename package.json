@@ -1,0 +1,23 @@
+{
+  "name": "gl-trainer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive course for graphics programming and OpenGL (WebGL2), as a web app and an installable phone app.",
+  "type": "module",
+  "scripts": {
+    "serve": "python3 -m http.server 8080 -d web",
+    "test": "node tests/smoke.mjs http://localhost:8080",
+    "cap:add:android": "cap add android",
+    "cap:add:ios": "cap add ios",
+    "cap:sync": "cap sync",
+    "cap:open:android": "cap open android",
+    "cap:open:ios": "cap open ios"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/ios": "^6.1.2",
+    "playwright": "^1.47.2"
+  }
+}

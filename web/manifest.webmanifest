@@ -1,0 +1,19 @@
+{
+  "name": "GL Trainer: Graphics Programming & OpenGL",
+  "short_name": "GL Trainer",
+  "description": "Learn graphics programming and OpenGL with live, editable WebGL2 lessons.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0d0f17",
+  "theme_color": "#0d0f17",
+  "categories": ["education", "developer"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
