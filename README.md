@@ -32,13 +32,21 @@ There's also a **Shader Playground** (a ray-marched scene you can edit) and a **
 
 ## Run it locally
 
-It's plain HTML/CSS/JS with no build step and no runtime dependencies. Serve the `web/` folder
-with any static server. (Opening it as a `file://` URL won't work because ES modules need HTTP.)
+You need [Node.js](https://nodejs.org) (any recent version) and [Git](https://git-scm.com).
+There's no build step and nothing to `npm install` to run the app.
 
 ```bash
-npm run serve          # = python3 -m http.server 8080 -d web
+git clone -b ccr-7316eb64-8ixqsn https://github.com/Curtis1811/Graphic-training.git
+cd Graphic-training
+npm run serve          # starts a tiny Node server (scripts/serve.mjs)
 # open http://localhost:8080
 ```
+
+`npm run serve` must be run **inside the `Graphic-training` folder**, the one that contains
+`package.json`. Running it anywhere else gives `ENOENT ... package.json`. Opening
+`web/index.html` directly as a file won't work either, because browsers block ES modules on
+`file://` URLs. Port busy? Use `set PORT=3000 && npm run serve` (cmd) or
+`$env:PORT=3000; npm run serve` (PowerShell).
 
 ## Put it on your phone
 
@@ -92,7 +100,7 @@ error appears, or if a canvas draws nothing.
 ```bash
 npm install              # installs Playwright
 npx playwright install chromium
-npm run serve &          # in another terminal
+npm run serve            # in another terminal
 npm test
 ```
 

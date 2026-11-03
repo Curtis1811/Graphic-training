@@ -5,7 +5,7 @@
   "description": "Interactive course for graphics programming and OpenGL (WebGL2), as a web app and an installable phone app.",
   "type": "module",
   "scripts": {
-    "serve": "python3 -m http.server 8080 -d web",
+    "serve": "node scripts/serve.mjs",
     "test": "node tests/smoke.mjs http://localhost:8080",
     "cap:add:android": "cap add android",
     "cap:add:ios": "cap add ios",
