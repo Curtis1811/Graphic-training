@@ -25,6 +25,10 @@ const store = {
   },
 };
 
+// True inside the Android APK (its WebView adds this to the user agent).
+const inApp = /GLTrainerApp/.test(navigator.userAgent);
+if (inApp) document.documentElement.classList.add('in-app');
+
 let progress = store.get('progress', {});
 const settings = Object.assign({ autorun: true }, store.get('settings', {}));
 
@@ -191,14 +195,14 @@ function renderHome() {
           <h3>Cheat Sheet</h3><p>GLSL types and functions, draw calls, state, and a "why is my screen black" checklist.</p></a>
       </div>
     </section>
-    <section class="module install-help">
+    ${inApp ? '' : `<section class="module install-help">
       <h2>Use it on your phone</h2>
       <div class="install-grid">
         <div><h3>iPhone / iPad (Safari)</h3><p>Tap the <b>Share</b> button, then <b>Add to Home Screen</b>.</p></div>
         <div><h3>Android (Chrome)</h3><p>Tap <b>⋮</b> → <b>Install app</b> (or "Add to Home screen"). You can also use the Install button at the top.</p></div>
         <div><h3>Works offline</h3><p>Once installed, lessons, your code and your progress stay on your device.</p></div>
       </div>
-    </section>
+    </section>`}
     <footer class="foot"><button class="link" id="resetAll">Reset all progress</button></footer>
   </div>`;
 
@@ -512,6 +516,7 @@ function setupWorkbench(lesson) {
 let deferredPrompt = null;
 const installBtn = $('#installBtn');
 window.addEventListener('beforeinstallprompt', (e) => {
+  if (inApp) return;
   e.preventDefault();
   deferredPrompt = e;
   installBtn.hidden = false;
@@ -525,7 +530,7 @@ installBtn.addEventListener('click', async () => {
 });
 window.addEventListener('appinstalled', () => { installBtn.hidden = true; });
 
-if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+if ('serviceWorker' in navigator && location.protocol !== 'file:' && !inApp) {
   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 }
 

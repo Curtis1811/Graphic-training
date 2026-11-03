@@ -55,7 +55,23 @@ npm run serve          # = python3 -m http.server 8080 -d web
 It opens full-screen like a native app and works offline. Progress and edited code are saved on
 the device.
 
-### Option B: native Android / iOS app (Capacitor)
+### Option B: Android APK, no Android Studio needed
+
+```bash
+./android-app/build-apk.sh        # -> dist/gl-trainer.apk
+```
+
+This builds a small native wrapper (`android-app/src/.../MainActivity.java`): a full-screen
+WebView that serves `web/` from inside the APK. It needs only a JDK (17+), Python 3 and curl. The
+Android API jar, `dx` and `apksig` are downloaded from Maven Central, and
+`android-app/tools/make_apk.py` writes the binary manifest and resource table itself. The APK
+targets Android 7.0+ and is signed with a key that is created in `~/.gl-trainer/release.p12` on
+the first run. Keep that file: Android only installs updates signed with the same key.
+
+To install it, copy the APK to your phone, open it, and allow "install unknown apps" for your
+browser or file manager when asked.
+
+### Option C: native Android / iOS app (Capacitor)
 
 The repo is set up for [Capacitor](https://capacitorjs.com), which wraps `web/` in a native shell
 that you can build and side-load or publish to the app stores.

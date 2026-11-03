@@ -34,6 +34,8 @@
 }
 
 * { box-sizing: border-box; }
+/* Classes like .btn set display, which would otherwise override the hidden attribute. */
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body {
   margin: 0;
